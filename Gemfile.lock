@@ -1,0 +1,18 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    taglib-ruby (0.7.1)
+    thor (0.20.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  taglib-ruby
+  thor
+
+RUBY VERSION
+   ruby 2.5.1p57
+
+BUNDLED WITH
+   1.16.1
