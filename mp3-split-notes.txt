@@ -2,3 +2,8 @@ mp3splt -S 4 -d split *.mp3
 # conver to mp3 from mp4
 
 ffmpeg -i input.mp4 output.mp3
+ffmpeg -i input.m4a output.mp3
+
+
+# find all mp3 files in directory:
+find "My Book" -type f -name "*.mp3" -exec cp {} newfolder \;
