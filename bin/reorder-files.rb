@@ -30,15 +30,12 @@ files.sort.each_with_index do |f, i|
     TagLib::MPEG::File.open(new_file_path) do |file|
       tag2 = file.id3v2_tag
       tag1 = file.id3v1_tag
-
-      puts tag1.title
-      puts tag2.track
-      puts tag1.title
-      puts tag2.track
       tag1.title = new_title
       tag1.track = track
+      tag1.album = track_postfix
       tag2.title = new_title
       tag2.track = track
+      tag2.album = track_postfix
       file.save
     end
   end
