@@ -1,3 +1,4 @@
+mp3splt -t 10.00 -d split *.mp3
 mp3splt -S 4 -d split *.mp3
 # conver to mp3 from mp4
 
