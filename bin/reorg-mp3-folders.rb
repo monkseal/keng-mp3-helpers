@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# ruby bin/reorg-mp3-folders.rb /Volumes/KEV/SongsNew/K
+
 require "fileutils"
 require "taglib"
 
@@ -7,9 +9,11 @@ if ARGV.length < 1
   raise "Too few arguments"
   exit
 end
+
 NO_ARTIST = 'NoArtist'
+
 src_dir = ARGV[0]
-dry_run = ARGV[1]
+# dry_run = ARGV[1] # TODO: get dry running working
 raise "Dir.exist?(#{src_dir}) fail" unless Dir.exist?(src_dir)
 files = Dir["#{ARGV.first}/**/*.mp3"]
 
@@ -41,23 +45,26 @@ end
 def reorg_mp3s(src_dir, artists)
   artists.each do |artist, files|
     if files.size < 3
-      puts "SKIP artist =>#{artist} #{files.size}"
+      puts "SKIPPING artist =>#{artist} [only #{files.size}]"
       next
     end
     new_dir = [src_dir, artist].join("/")
-    Dir.mkdir(new_dir) unless Dir.exist?(new_dir)
+    unless Dir.exist?(new_dir)
+      puts "New artist Dir => #{new_dir} #{files.size}"
+      Dir.mkdir(new_dir)
+    end
 
-    puts "new_dir => #{new_dir}"
     files.each do|old_path|
       mp3 = File.basename(old_path)
       new_path = [new_dir,mp3].join("/")
-      next if old_path == new_path
+      next if old_path.downcase == new_path.downcase
+      puts "old_path #{old_path} new_path #{new_path}"
       FileUtils.mv old_path, new_path
     end
   end
 end
 artists = collect_artist(files)
 
-puts "NoArtist #{artists["NoArtist"]}"
+puts "Artists #{artists.keys}"
 reorg_mp3s(src_dir, artists)
 
