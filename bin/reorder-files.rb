@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# ruby bin/reorder-files.rb "~/Music/Audio Books/Men Who Lost America/100" "Men Who Lost America 100"
+
 require "fileutils"
 require "taglib"
 
