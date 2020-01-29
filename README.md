@@ -1,6 +1,6 @@
 These are scripts that I use to reorder mp3s I have extracted from Audio Book CDs that I borrow from the library. 
 
-# Require tools
+# Required tools
 ## Install taglib:
 
 ```
@@ -16,11 +16,11 @@ bundle install
 ruby bin/reorder-files.rb "~/Music/Audio Books/Men Who Lost America/100" "Men Who Lost America 100"
 ```
 
-# Reorder file (new version)
+# Reorder files (new version)
 ```
 ruby ./bin/ord2.rb ~/books/Agassi_Open -r -t "Agassi Open"
 ```
-# Options
+## Options
 
 | option    | purpose                                                                    |
 |-----------|----------------------------------------------------------------------------|
