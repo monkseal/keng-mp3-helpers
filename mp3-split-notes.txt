@@ -8,3 +8,5 @@ ffmpeg -i input.m4a output.mp3
 
 # find all mp3 files in directory:
 find "My Book" -type f -name "*.mp3" -exec cp {} newfolder \;
+
+# ruby /Users/kenglish/workspace/monkseal/keng-mp3-helpers/bin/reorder-files.rb "~/Music/Audio Books/Men Who Lost America/100" "Men Who Lost America 100"
