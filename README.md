@@ -1,4 +1,4 @@
-These are scripts that I use to reorder mp3s I have extracted from Audio Book CDs that I borrow from the library. 
+These are scripts that I use to reorder mp3s I have extracted from Audio Book CDs that I borrow from the library.
 
 # Required tools
 ## Install taglib:
@@ -10,10 +10,14 @@ Run bundler:
 ```
 bundle install
 ```
-
-# Reorder files
+# Split and Reorder (use -s)
 ```
-ruby bin/reorder-files.rb "~/Music/Audio Books/Men Who Lost America/100" "Men Who Lost America 100"
+./bin/reorder-files.rb ~/Music/Audiobook/12\ Rules\ for\ Life -s -t "12 Rules for Life"
+```
+# Reorder files only
+```
+./bin/reorder-files.rb ~/Music/Audiobook/12\ Rules\ for\ Life -t "12 Rules for Life"
+
 ```
 
 # Reorder files (new version)
