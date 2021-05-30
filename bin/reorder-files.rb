@@ -48,7 +48,7 @@ if options[:split]
   puts "Splitting #{split_dirname}"
 
   raise "#{split_dirname} already exists" if Dir.exist?(split_dirname)
-  cmd = "mp3splt -t 10.00 -d \"#{split_dirname.shellescape}\"  #{src_dir.shellescape}/*.mp3"
+  cmd = "mp3splt -t 12.00 -d \"#{split_dirname.shellescape}\"  #{src_dir.shellescape}/*.mp3"
   result = `#{cmd}`
   src_dir = split_dirname
 end
