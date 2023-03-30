@@ -1,5 +1,10 @@
 These are scripts that I use to reorder mp3s I have extracted from Audio Book CDs that I borrow from the library.
 
+# TLDR
+```
+./bin/reorder-files.rb ~/Music/Audiobook/Book1 -s -t "Book1"
+```
+
 # Required tools
 ## Install taglib:
 

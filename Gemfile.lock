@@ -1,8 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    taglib-ruby (1.0.1)
-    thor (1.0.1)
+    taglib-ruby (1.1.2)
+    thor (1.2.1)
 
 PLATFORMS
   ruby
@@ -12,7 +12,7 @@ DEPENDENCIES
   thor
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 2.7.6p219
 
 BUNDLED WITH
    2.1.4
