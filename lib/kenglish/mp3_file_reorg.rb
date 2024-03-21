@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "fileutils"
 require "taglib"
 
@@ -13,23 +15,24 @@ module Kenglish
     def run
       raise "Dir.exist?(#{src_dir}) fail" unless Dir.exist?(src_dir)
       
+      new_dir = generate_new_dir
       Dir.mkdir(new_dir) unless Dir.exist?(new_dir)
-      puts "#{new_dir}"
+      puts "Renaming files and moving to #{new_dir}"
 
       files = Dir[file_pattern]
-      files = files.sort.select{|f| !File.directory?(f) && f =~ /mp3$/ }
+      files = files.sort.select { |f| !File.directory?(f) && f =~ /mp3$/ }
       files.sort.each_with_index do |f, i|
         track = i + 1
-        rename(f, track)
+        rename(new_dir, f, track)
       end
     end
 
-    def rename(f, track)
+    def rename(new_dir, f, track)
       new_title = "#{format('%03d', track)} - #{track_postfix}"
       new_file_path = "#{new_dir}/#{new_title}.mp3"
       if dry_run?
-         puts "[DRY RUN] #{f} --> #{new_file_path}"
-         return
+        puts "[DRY RUN] #{f} --> #{new_file_path}"
+        return
       end
       puts new_file_path
       FileUtils.cp(f, new_file_path)
@@ -46,7 +49,6 @@ module Kenglish
       end
     end
 
-
     private
 
     def dry_run?
@@ -62,11 +64,17 @@ module Kenglish
     end
 
     def file_pattern
-      options[:recursive] ? "#{src_dir}/**/*": "#{src_dir}/*"
+      options[:recursive] ? "#{src_dir}/**/*" : "#{src_dir}/*"
     end
 
-    def new_dir
-      @new_dir ||= "#{src_dir.chomp('/')}-renamed"
+    def generate_new_dir
+      if options[:title]
+        root_dir = File.dirname(src_dir)
+        File.join(root_dir, options[:title])
+      else
+        "#{src_dir.chomp('/')}-renamed"
+      end
+       
     end
   end
 end

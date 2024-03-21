@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+
 # Use folder as track name
 # ./bin/reorder-files.rb ~/books/Agassi_Open -r
 # Use custom as title/track name
@@ -9,6 +10,7 @@ require 'shellwords'
 require 'optparse'
 require 'fileutils'
 require_relative './../lib/kenglish/mp3_file_reorg'
+require_relative './../lib/kenglish/mp3_split'
 options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: example.rb [options]"
@@ -43,21 +45,12 @@ src_dir = ARGV[0]
 split_dirname = nil
 
 if options[:split]
-  # FileUtils.mkdir src_dir, "#{src_dir}"
-  split_dirname = "#{src_dir}-new".gsub(' ', '-')
-  puts "Splitting #{split_dirname}"
-
-  raise "#{split_dirname} already exists" if Dir.exist?(split_dirname)
-  cmd = "mp3splt -t 18.00 -d \"#{split_dirname.shellescape}\"  #{src_dir.shellescape}/*.mp3"
-  result = `#{cmd}`
-  src_dir = split_dirname
-end
-puts cmd
-# FileUtils.mkdir
-Kenglish::Mp3FileReog.new(src_dir, options).run
-
-if options[:split]
-  FileUtils.rm_rf(split_dirname)
+  split_dir = split_dir = Kenglish::Mp3Split.new(src_dir, options).run
+  puts "split_dir #{split_dir}"
+  Kenglish::Mp3FileReog.new(split_dir, options).run
+  FileUtils.rm_rf(split_dir)
+else
+  Kenglish::Mp3FileReog.new(src_dir, options).run
 end
 
 
