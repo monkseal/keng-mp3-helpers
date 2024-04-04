@@ -3,6 +3,8 @@ These are scripts that I use to reorder mp3s I have extracted from Audio Book CD
 # TLDR
 ```
 ./bin/reorder-files.rb ~/Music/Audiobook/Book1 -s -t "Book1"
+
+./bin/reorder-files.rb "/Volumes/music/Audiobooks/Non Fiction/Buddhism Audiobooks/Buddhism Without Beliefs.mp3" -s
 ```
 
 # Required tools
