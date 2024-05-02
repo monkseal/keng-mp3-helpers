@@ -72,6 +72,11 @@ find "My Book" -type f -name "*.mp3" -exec cp {} newfolder \;
 ```
 cdparanoia -vsQ
 ```
+Rip Tracks:
+```
+abcde -o mp3
+```
+
 show track info
 ```
 ffprobe 10.Track_10.mp3
