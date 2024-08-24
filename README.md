@@ -82,3 +82,7 @@ show track info
 ffprobe 10.Track_10.mp3
 ```
 
+Extract audio from movie file:
+```
+ffmpeg -i Trolls.2016.mp4 -b:a 96K -vn trolls-2016.mp3
+```

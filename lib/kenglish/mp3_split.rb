@@ -6,7 +6,7 @@ module Kenglish
   class Mp3Split
     attr_reader :src_file_or_dir, :options, :split_minutes
 
-    DEFAULT_SPLIT_MINUTES = "18.00"
+    DEFAULT_SPLIT_MINUTES = "20.00"
 
     def initialize(src_file_or_dir, options)
       @src_file_or_dir = src_file_or_dir
