@@ -11,7 +11,7 @@ module Kenglish
     def initialize(src_file_or_dir, options)
       @src_file_or_dir = src_file_or_dir
       @options = options
-      @split_minutes = options.fetch(:split_minutes, DEFAULT_SPLIT_MINUTES)
+      @split_minutes = format("%.2f", options.fetch(:split_minutes, DEFAULT_SPLIT_MINUTES).to_f)
     end
 
     def run

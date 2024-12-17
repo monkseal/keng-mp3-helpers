@@ -27,6 +27,9 @@ OptionParser.new do |opts|
   opts.on("-s", "--split", "split files first") do |s|
     options[:split] = s
   end
+  opts.on("-mMINUTES", "--minutes=MINUTES", "split files first") do |split_minutes|
+    options[:split_minutes] = split_minutes
+  end
 
   opts.on("-tNAME", "--title=NAME", "title") do |title|
     options[:title] = title
