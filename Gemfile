@@ -1,5 +1,6 @@
 source "https://rubygems.org"
-ruby "3.3.6"
+ruby "3.3.7"
 gem "taglib-ruby"
 gem "thor"
 gem "pry"
+gem "pry-byebug"

@@ -59,11 +59,6 @@ Split file into 4 even segments:
 ```
 mp3splt -S 4 -d split *.mp3
 ```
-## convert to mp3 from mp4/m4a
-```
-ffmpeg -i input.mp4 output.mp3
-ffmpeg -i input.m4a output.mp3
-```
 
 ## find all mp3 files in directory:
 find "My Book" -type f -name "*.mp3" -exec cp {} newfolder \;
@@ -82,7 +77,14 @@ show track info
 ffprobe 10.Track_10.mp3
 ```
 
-Extract audio from movie file:
+### Extract audio from movie file:
 ```
 ffmpeg -i Trolls.2016.mp4 -b:a 96K -vn trolls-2016.mp3
+ffmpeg -i Winnie.the.Pooh.Springtime.with.Roo.2004.1080p.BluRay.DDP.5.1.x265-edge2020.mkv -b:a 96K -vn  Winnie.the.Pooh.Springtime.with.Roo.2004.1080p.BluRay.DDP.5.1.x265-edge2020.mp3
+```
+
+## convert to mp3 from mp4/m4a
+```
+ffmpeg -i input.mp4 output.mp3
+ffmpeg -i input.m4a output.mp3
 ```

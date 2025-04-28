@@ -45,10 +45,9 @@ if ARGV.length < 1
 end
 
 src_dir = ARGV[0]
-split_dirname = nil
 
 if options[:split]
-  split_dir = split_dir = Kenglish::Mp3Split.new(src_dir, options).run
+  split_dir = Kenglish::Mp3Split.new(src_dir, options).run
   puts "split_dir #{split_dir}"
   Kenglish::Mp3FileReog.new(split_dir, options).run
   FileUtils.rm_rf(split_dir)
