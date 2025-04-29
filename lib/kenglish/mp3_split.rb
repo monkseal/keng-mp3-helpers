@@ -2,6 +2,8 @@
 
 require "fileutils"
 require "pry"
+require 'ffprober'
+
 module Kenglish
   class Mp3Split
     attr_reader :src_file_or_dir, :options, :split_minutes
@@ -11,7 +13,11 @@ module Kenglish
     def initialize(src_file_or_dir, options)
       @src_file_or_dir = src_file_or_dir
       @options = options
-      @split_minutes = format("%.2f", options.fetch(:split_minutes, DEFAULT_SPLIT_MINUTES).to_f)
+      if options[:split_minutes].nil? && File.file?(src_file_or_dir)
+        @split_minutes = calculate_split_minutes(src_file_or_dir)
+      else
+        @split_minutes = format("%.2f", options.fetch(:split_minutes, DEFAULT_SPLIT_MINUTES).to_f)
+      end
     end
 
     def run
@@ -19,7 +25,6 @@ module Kenglish
         split_file(src_file_or_dir)
       elsif Dir.exist?(src_file_or_dir)
         split_into_new_dir(src_file_or_dir)
-
       else
         raise "src_file_or_dir is not a file or director (#{src_file_or_dir})"
       end
@@ -51,6 +56,14 @@ module Kenglish
       cmd = "mp3splt -t #{split_minutes} -d #{split_dir.shellescape}  #{src_file.shellescape}"
       result = `#{cmd}`
       split_dir
+    end
+
+    def calculate_split_minutes(src_file_or_dir)
+      ffprobe = Ffprober::Parser.from_file(src_file_or_dir)
+      duration = ffprobe.format.duration.to_f / 60.0
+      split_size = 100.0
+      split_size = 50.0 if duration < 1000.0
+      (duration / split_size ).ceil(2).to_s
     end
   end
 end
