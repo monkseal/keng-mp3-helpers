@@ -40,6 +40,7 @@ module Kenglish
       puts "Splitting #{split_dir}"
       cmd = "mp3splt -t #{split_minutes} -d #{split_dir.shellescape}  #{src_dir.shellescape}/*.mp3"
       result = `#{cmd}`
+
       split_dir
     end
 
@@ -59,11 +60,17 @@ module Kenglish
     end
 
     def calculate_split_minutes(src_file_or_dir)
+      
       ffprobe = Ffprober::Parser.from_file(src_file_or_dir)
       duration = ffprobe.format.duration.to_f / 60.0
       split_size = 100.0
       split_size = 50.0 if duration < 1000.0
-      (duration / split_size ).ceil(2).to_s
+      split_size = 30.0 if duration < 500.0
+      split_minutes = (duration / split_size ).ceil(2)
+      minutes = split_minutes.floor
+      fraction = split_minutes - minutes
+      seconds = (fraction * 60).round(0)
+      "#{minutes}.#{seconds}"
     end
   end
 end
