@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "3.3.8"
+ruby "3.3.9"
 gem "taglib-ruby"
 gem "thor"
 gem "pry"

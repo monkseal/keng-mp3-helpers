@@ -63,7 +63,7 @@ module Kenglish
       
       ffprobe = Ffprober::Parser.from_file(src_file_or_dir)
       duration = ffprobe.format.duration.to_f / 60.0
-      split_size = 100.0
+      split_size = 99.0
       split_size = 50.0 if duration < 1000.0
       split_size = 30.0 if duration < 500.0
       split_minutes = (duration / split_size ).ceil(2)
