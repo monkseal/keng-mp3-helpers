@@ -83,6 +83,11 @@ ffmpeg -i Trolls.2016.mp4 -b:a 96K -vn trolls-2016.mp3
 ffmpeg -i Winnie.the.Pooh.Springtime.with.Roo.2004.1080p.BluRay.DDP.5.1.x265-edge2020.mkv -b:a 96K -vn  Winnie.the.Pooh.Springtime.with.Roo.2004.1080p.BluRay.DDP.5.1.x265-edge2020.mp3
 ```
 
+## *NEW* convert to mp3 from mp4/m4a
+```
+bin/convert-files-to-mp3.rb /Users/kenglish/Downloads/incoming-media/NewBook
+```
+
 ## convert to mp3 from mp4/m4a
 ```
 ffmpeg -i input.mp4 output.mp3
