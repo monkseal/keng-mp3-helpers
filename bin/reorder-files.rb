@@ -11,6 +11,7 @@ require 'optparse'
 require 'fileutils'
 require_relative './../lib/kenglish/mp3_file_reorg'
 require_relative './../lib/kenglish/mp3_split'
+require_relative './../lib/kenglish/m4b_converter'
 options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: example.rb [options]"
@@ -46,7 +47,12 @@ end
 
 src_dir = ARGV[0]
 
-if options[:split]
+if File.file?(src_dir) && File.extname(src_dir) == '.m4b'
+  output_file = Kenglish::M4bConverter.new(src_dir).run
+  split_dir = Kenglish::Mp3Split.new(output_file, options).run
+  Kenglish::Mp3FileReog.new(split_dir, options).run
+  FileUtils.rm_rf(split_dir)
+elsif options[:split]
   split_dir = Kenglish::Mp3Split.new(src_dir, options).run
   Kenglish::Mp3FileReog.new(split_dir, options).run
   FileUtils.rm_rf(split_dir)
