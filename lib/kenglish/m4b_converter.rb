@@ -13,6 +13,11 @@ module Kenglish
     end
 
     def run
+      if File.exist?(output_file) && File.size(output_file) > 0
+        puts "Skipping: #{File.basename(output_file)} already exists"
+        return output_file
+      end
+
       puts "Converting: #{File.basename(input_file)} -> #{File.basename(output_file)}"
       cmd = "ffmpeg -i #{Shellwords.escape(input_file)} #{Shellwords.escape(output_file)}"
       system(cmd)

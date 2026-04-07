@@ -52,12 +52,19 @@ if File.file?(src_dir) && File.extname(src_dir) == '.m4b'
   split_dir = Kenglish::Mp3Split.new(output_file, options).run
   Kenglish::Mp3FileReog.new(split_dir, options).run
   FileUtils.rm_rf(split_dir)
-elsif options[:split]
-  split_dir = Kenglish::Mp3Split.new(src_dir, options).run
-  Kenglish::Mp3FileReog.new(split_dir, options).run
-  FileUtils.rm_rf(split_dir)
 else
-  Kenglish::Mp3FileReog.new(src_dir, options).run
+  if Dir.exist?(src_dir)
+    m4b_files = Dir.entries(src_dir).select { |f| File.extname(f) == '.m4b' }.sort.map { |f| File.join(src_dir, f) }
+    m4b_files.each { |f| Kenglish::M4bConverter.new(f).run } if m4b_files.any?
+  end
+
+  if options[:split]
+    split_dir = Kenglish::Mp3Split.new(src_dir, options).run
+    Kenglish::Mp3FileReog.new(split_dir, options).run
+    FileUtils.rm_rf(split_dir)
+  else
+    Kenglish::Mp3FileReog.new(src_dir, options).run
+  end
 end
 
 

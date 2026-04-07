@@ -64,7 +64,8 @@ module Kenglish
     end
 
     def file_pattern
-      options[:recursive] ? "#{src_dir}/**/*" : "#{src_dir}/*"
+      escaped = src_dir.gsub(/[\[\]{}*?]/) { |m| "\\#{m}" }
+      options[:recursive] ? "#{escaped}/**/*" : "#{escaped}/*"
     end
 
     def generate_new_dir
