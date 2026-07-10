@@ -1,20 +1,23 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    byebug (12.0.0)
+    byebug (13.0.0)
+      reline (>= 0.6.0)
     coderay (1.1.3)
-    ffprober (1.0)
-      sorbet-runtime
+    ffprober (2.0)
+    io-console (0.8.2)
     method_source (1.1.0)
-    pry (0.15.2)
+    pry (0.16.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    pry-byebug (3.11.0)
-      byebug (~> 12.0)
-      pry (>= 0.13, < 0.16)
-    sorbet-runtime (0.6.12666)
+      reline (>= 0.6.0)
+    pry-byebug (3.12.0)
+      byebug (~> 13.0)
+      pry (>= 0.13, < 0.17)
+    reline (0.6.3)
+      io-console (~> 0.5)
     taglib-ruby (2.0.0)
-    thor (1.4.0)
+    thor (1.5.0)
 
 PLATFORMS
   ruby
