@@ -6,6 +6,8 @@
 # ./bin/reorder-files.rb ~/books/Agassi_Open -r -t "Agassi Open"
 # DRY RUN
 # ./bin/reorder-files.rb ~/books/Agassi_Open -d -r -t "Agassi Open
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../Gemfile', __dir__)
+require 'bundler/setup'
 require 'shellwords'
 require 'optparse'
 require 'fileutils'
@@ -14,7 +16,9 @@ require_relative './../lib/kenglish/mp3_split'
 require_relative './../lib/kenglish/m4b_converter'
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: example.rb [options]"
+  opts.banner = "Usage: #{File.basename($0)} PATH [options]"
+  opts.separator ""
+  opts.separator "Options:"
 
   opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
     options[:verbose] = v
@@ -28,13 +32,18 @@ OptionParser.new do |opts|
   opts.on("-s", "--split", "split files first") do |s|
     options[:split] = s
   end
-  opts.on("-mMINUTES", "--minutes=MINUTES", "split files first") do |split_minutes|
+  opts.on("-mMINUTES", "--minutes=MINUTES", "minutes per split file") do |split_minutes|
     options[:split_minutes] = split_minutes
   end
 
   opts.on("-tNAME", "--title=NAME", "title") do |title|
     options[:title] = title
   end
+
+  opts.separator ""
+  opts.separator "Examples:"
+  opts.separator "    ./bin/reorder-files.rb ~/Music/Audiobook/Book1 -s -t \"Book1\""
+  opts.separator "    ./bin/reorder-files.rb \"/Volumes/music/Audiobooks/Non Fiction/Buddhism Audiobooks/Buddhism Without Beliefs.mp3\" -s"
 end.parse!
 
 p options
